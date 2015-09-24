@@ -1,0 +1,20 @@
+<%= @user.first_name %> 
+<%= @user.last_name %>
+
+<form action="/posts" method="post">
+	<input type="hidden" name="user_id" value="<%= @user.id %>">
+	<p>
+		<label for="content">Content</label>
+		<textarea id="content" name="content"></textarea>
+	</p>
+	<input type="submit" value="Create Post">
+</form>
+
+<% @user.posts.each do |p| %>
+	<p>	<%= p.content %> </p>
+		<form action='/posts/<%= p.id %>' method='post'>
+			<input type='hidden' name='user_id' value='<%= @user.id %>'>
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Delete Post'>
+		</form>
+<% end %>
